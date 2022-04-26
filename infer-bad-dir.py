@@ -16,9 +16,6 @@ from tqdm import tqdm
 from scipy.special import softmax
 from python_speech_features import logfbank
 
-from module.model import Gvector
-
-
 mdl_bad_kwargs = {
     "channels": 16, 
     "block": "BasicBlock", 
@@ -75,11 +72,7 @@ class SVExtractor():
         self.model = self.model.to(self.device)
 
     def load_model(self, mdl_kwargs, model_path, device):
-        model = Gvector(**mdl_kwargs)
-        state_dict = torch.load(model_path, map_location=device)
-        if 'model' in state_dict.keys():
-            state_dict = state_dict['model']
-        model.load_state_dict(state_dict)
+        model = torch.load(model_path, map_location=device)
         return model
 
     def __call__(self, frame_feats):
