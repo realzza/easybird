@@ -47,7 +47,7 @@ def parse_args():
     parser.add_argument('--nt', type=float, default=0.5, help="noise threshold, default: 0.5")
     return parser.parse_args()
 
-def extract_feat(wav_path, cmn=True):
+def extract_feat(wav_path, samplerate=16000, cmn=True):
     kwargs = {
         "winlen": 0.025,
         "winstep": 0.01,
@@ -58,6 +58,9 @@ def extract_feat(wav_path, cmn=True):
         "preemph": 0.97
     }
     y, sr = af.read(wav_path)
+    if sr!=samplerate:
+        y = soxr.resample(x, sr, samplerate)
+        sr = samplerate
     logfbankFeat = logfbank(y, sr, **kwargs)
     if cmn:
         logfbankFeat -= logfbankFeat.mean(axis=0, keepdims=True)
