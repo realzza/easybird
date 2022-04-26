@@ -45,7 +45,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument("--data", type=str, required=True)
     parser.add_argument('--model-bad', type=str, required=True)
-    parser.add_argument('--device', type=str, default="cuda:0")
+    parser.add_argument('--device', type=str, default="cpu")
+    parser.add_argument('--nt', type=float, default=0.5, help="noise threshold, default: 0.5")
     return parser.parse_args()
 
 def extract_feat(wav_path, cmn=True):
@@ -88,24 +89,18 @@ class SVExtractor():
         embd = embd.squeeze(0).cpu().numpy()
         return embd
     
-def most_common(lst):
-    return max(set(lst), key=lst.count)
-    
-def infer_bad(wav, detector, int2label_dict):
+def infer_bad(wav, detector, noise_thres, int2label_dict):
     wav_feats = extract_feat(wav)
     logits = softmax(detector(wav_feats))
-    hasBird = np.argmax(logits)
+    hasBird = (logits[1].item() >= noise_thres)
     return hasBird, logits[1]
     
 if __name__ == "__main__":
-    
-    with open('kill.sh','w') as f:
-        f.write('')
-        
+
     args = parse_args()
     model_bad_path = args.model_bad
-    label2int = {"0":0,"1":1}
-    int2label = {v:k for k,v in label2int.items()}
+    
+    int2label = {0:"0",1:"1"}
         
     print('... loading activity detector ...')
     bad_extractor = SVExtractor(mdl_bad_kwargs, model_bad_path, device=args.device)
@@ -114,7 +109,7 @@ if __name__ == "__main__":
     pred_dict = {}
     
     wav_ = args.data
-    hasBird, confidence = infer_bad(wav_, bad_extractor, int2label)
+    hasBird, confidence = infer_bad(wav_, bad_extractor, args.nt, int2label)
 
     result = ["noise","bird"]
     print(result[hasBird],confidence)
