@@ -1,0 +1,16 @@
+audiofile
+argparse
+torch
+torchaudio
+torchvision
+numpy
+tqdm
+sklearn
+pandas
+soundfile
+h5py
+python_speech_features
+gpustat
+ipykernel
+gpustat
+soxr
