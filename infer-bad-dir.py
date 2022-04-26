@@ -107,8 +107,9 @@ if __name__ == "__main__":
     all_wavs = [data_dir+wav for wav in os.listdir(data_dir) if wav.endswith('.wav')]
     out_list = []
     for wav_ in tqdm(all_wavs, desc="Detecting noises"):
+        utt_ = wav_.split('/')[-1].split('.')[0]
         hasBird, confidence = infer_bad(wav_, bad_extractor, args.nt, int2label)
-        out_list.append("%d %.4f"%(hasBird, confidence))
+        out_list.append("%s %d %.4f"%(utt_, hasBird, confidence))
     
     with open(out_file,'w') as f:
         f.write('\n'.join(out_list))

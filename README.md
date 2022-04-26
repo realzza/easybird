@@ -12,4 +12,7 @@ Identify bird activities from wavform directory
 ```bash
 python infer-bad-dir.py --data dir/to/wavs --model-bad easyBAD.pt --device cpu -o out.txt
 ```
-
+the output file will be in the format of
+```text
+utt_id   hasBird   Logits
+```
