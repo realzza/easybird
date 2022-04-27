@@ -1,15 +1,7 @@
 import os
-import sys
-import sox
-import json
-import h5py
-import time
+import soxr
 import torch
-import shutil
-import GPUtil
 import argparse
-import numpy as np
-import pandas as pd
 import audiofile as af
 
 from tqdm import tqdm
