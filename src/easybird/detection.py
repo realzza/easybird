@@ -44,7 +44,7 @@ def extract_feat(wav_path, samplerate=16000, cmn=True):
     }
     y, sr = af.read(wav_path)
     if sr!=samplerate:
-        y = soxr.resample(x, sr, samplerate)
+        y = soxr.resample(y, sr, samplerate)
         sr = samplerate
     logfbankFeat = logfbank(y, sr, **kwargs)
     if cmn:
