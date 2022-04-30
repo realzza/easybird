@@ -1,4 +1,9 @@
 # easybird
+![PyPI](https://img.shields.io/pypi/v/easybird?color=df&style=flat-square)&nbsp;
+![GitHub last commit](https://img.shields.io/github/last-commit/realzza/easybird?color=orange&style=flat-square)&nbsp;
+![GitHub top language](https://img.shields.io/github/languages/top/realzza/easybird?color=%236495ed&style=flat-square)&nbsp;
+![GitHub](https://img.shields.io/github/license/realzza/easybird?color=%23FFB6C1&style=flat-square)
+
 **easybird** is python toolkit for Bird Activity Detection (BAD).
 
 ## Install
