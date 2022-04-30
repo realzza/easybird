@@ -1,8 +1,7 @@
 import os
 import soxr
 import torch
-import argparse
-import audiofile as af
+import soundfile as sf
 
 from tqdm import tqdm
 from scipy.special import softmax
@@ -42,7 +41,7 @@ def extract_feat(wav_path, samplerate=16000, cmn=True):
         "highfreq": 8000,
         "preemph": 0.97
     }
-    y, sr = af.read(wav_path)
+    y, sr = sf.read(wav_path)
     if sr!=samplerate:
         y = soxr.resample(y, sr, samplerate)
         sr = samplerate
