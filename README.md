@@ -5,17 +5,19 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/realzza/easybird?color=%236495ed&style=flat)&nbsp;
 [![CodeFactor](https://www.codefactor.io/repository/github/realzza/easybird/badge)](https://www.codefactor.io/repository/github/realzza/easybird)&nbsp;
 
-**easybird** is python toolkit for Bird Activity Detection (BAD).
+---
+
+**Easybird** is python toolkit for Bird Activity Detection (BAD).
 
 ## Setup and Install
-We recommend using conda to create virtual environment, since we use conda-forge to install an essential library [`libsndfile`](https://anaconda.org/conda-forge/libsndfile/). To setup, copy the following command to your terminal.
+We recommend using **conda** for environment management, since we use conda-forge to install an essential library `libsndfile`. To setup, copy the following command to your terminal.
 ```bash
 conda create -n bird
 conda activate bird
-conda install -c conda-forge libsndfile
+conda install -c conda-forge libsndfile -y
 ```
 
-Easy install with `pip`.
+After setup the virtual env, install with pip.
 ```bash
 pip install easybird
 ```
