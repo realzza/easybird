@@ -27,7 +27,7 @@ Identify bird activities for single waveform.
 ```python
 from easybird import detection
 
-hasBird, confidence = detection.from_wav('bird.wav')
+hasBird, confidence = detection.from_wav('bird.wav', noise_thres=0.5, device='cpu') # device=option('cuda','cpu')
 ```
 Output
 ```python
@@ -42,10 +42,10 @@ Identify bird activities for multiple wavforms.
 ```python
 from easybird import detection
 
-results = detection.from_wavs(['bird1.wav','bird2.wav','bird3.wav'])
+results = detection.from_wavs(['bird1.wav','bird2.wav','bird3.wav'], noise_thres=0.5, device='cpu')
 ```
 Output
 ```python
 print(results)
->>> [(bird1, True, 0.99963122), (bird2, True, 0.37834975), (bird3, True, 0.87340939)]
+>>> [(bird1, True, 0.99963122), (bird2, False, 0.37834975), (bird3, True, 0.87340939)]
 ```
